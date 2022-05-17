@@ -17,7 +17,8 @@ jobs:
           script: |
             ls -al
             cd miniproject
-            ls -al
+            git pull
+            node app.js
           # cd /home/ubuntu/Node.js_specialty
           # git pull origin master
           # npm install
