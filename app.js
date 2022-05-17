@@ -1,46 +1,46 @@
-const express = require('express')
-const jwt = require("jsonwebtoken"); //jwt 모듈 불러오기 
-const renders = require('./renders')
-const router = require('./routers')
-const cors = require('cors')
-const app = express()
+const express = require("express");
+const jwt = require("jsonwebtoken"); //jwt 모듈 불러오기
+const router = require("./routers");
+const cors = require("cors");
+const app = express();
 
-const socketIo = require('socket.io')
-const server = require('http').createServer(app)
-// // 모든 도메인 허용 
+const socketIo = require("socket.io");
+const server = require("http").createServer(app);
+// // 모든 도메인 허용
 
 const io = socketIo(server, {
-    cors : {
-        origin:"*", //여기에 명시된 서버만 호스트만 내서버로 연결을 허용할거야
-        methods: ["GET","POST"],
-    },
-})
+  cors: {
+    origin: "*", //여기에 명시된 서버만 호스트만 내서버로 연결을 허용할거야
+    methods: ["GET", "POST"],
+  },
+});
 
-// 모든 도메인 허용 
+// 모든 도메인 허용
 app.use(cors());
 
-app.use(express.urlencoded({extended: false}), router)
-app.use(express.json())
+app.use(express.urlencoded({ extended: false }), router);
+app.use(express.json());
 
-const connect = require('./schemas');
-connect()
+const connect = require("./schemas");
+connect();
 
-app.use('/api', router)
+app.use("/api", router);
 
 server.listen(3000, () => {
-    console.log('3000번 서버가 정상적으로 켜졌습니다')
-})
+  console.log("3000번 서버가 정상적으로 켜졌습니다");
+});
 
-io.on("connection", (socket)=> {
-    console.log("연결이되었습니다.")
-    socket.on("init", (payload) => {
-        console.log(payload)
-    })
-    socket.on("send message", (item) => {//send message 이벤트 발생
-        console.log(item.name + " : " + item.message);
-       io.emit("receive message", { name: item.name, message: item.message });
-       //클라이언트에 이벤트를 보냄
-     });
-})
+io.on("connection", (socket) => {
+  console.log("연결이되었습니다.");
+  socket.on("init", (payload) => {
+    console.log(payload);
+  });
+  socket.on("send message", (item) => {
+    //send message 이벤트 발생
+    console.log(item.name + " : " + item.message);
+    io.emit("receive message", { name: item.name, message: item.message });
+    //클라이언트에 이벤트를 보냄
+  });
+});
 
-module.exports = app
+module.exports = app;
