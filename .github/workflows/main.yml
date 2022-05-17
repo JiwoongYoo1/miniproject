@@ -15,6 +15,7 @@ jobs:
           key: ${{ secrets.REMOTE_SSH_KEY }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
+            cd miniproject
             git pull
             npm install
             pm2 start app.js
