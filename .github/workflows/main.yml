@@ -18,7 +18,7 @@ jobs:
             cd miniproject
             git pull
             npm install
-            pm2 restart app.js
+            pm2 start app.js
           # cd /home/ubuntu/Node.js_specialty
           # git pull origin master
           # npm install
