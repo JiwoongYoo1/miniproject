@@ -17,6 +17,6 @@ jobs:
           timeout: 40s # 30초 기본
           script: |
           cd /home/ubuntu/Node.js_specialty
-          sudo git pull
-          sudo npm install
-          sudo pm2 restart app.js
+          git pull origin master
+          npm install
+          pm2 restart app.js
