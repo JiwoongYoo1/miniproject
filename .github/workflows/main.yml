@@ -15,10 +15,8 @@ jobs:
           key: ${{ secrets.REMOTE_SSH_KEY }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
-            ls -al
             cd miniproject
-            git pull
-            node app.js
+            ^C
           # cd /home/ubuntu/Node.js_specialty
           # git pull origin master
           # npm install
