@@ -15,7 +15,7 @@ jobs:
           key: ${{ secrets.REMOTE_SSH_KEY }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
-            echo "테스트 출력"
+            ls -al
 
           # cd /home/ubuntu/Node.js_specialty
           # git pull origin master
